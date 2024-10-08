@@ -23,5 +23,10 @@
         "https://yandex.com/*search*"
       ]
     }
-  ]
+  ],
+  "browser_specific_settings": {
+  "gecko": {
+    "id": "{62cdc5bb-7d77-4c0d-8b3d-34f6e4bc8865}"
+  }
+}
 }
