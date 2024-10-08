@@ -9,6 +9,9 @@
 
   1. Открыть страницу (chrome://extensions)
   2. Включить режим разработчика (правый верхний угол)
-  3. Загрузить распакованное расширение (левый верхний угол) или загрузить сжатую [версию]([url](https://github.com/valiantsin-dzerakh/yandex-one-tab/releases/download/v1.0/yandex-one-tab.v1.crx))
+  3. Обновить страницу
+  4. Загрузить расширение<br>
+  **Вариант 1:** Загрузить распакованное расширение (левый верхний угол) <br>
+  **Вариант 2:** Загрузить сжатую версию (путем перетаскивания файла сжатого расширения https://github.com/valiantsin-dzerakh/yandex-one-tab/releases/download/v1.0/yandex-one-tab.v1.crx)
 
 </details>
