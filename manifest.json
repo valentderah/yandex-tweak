@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Одна вкладка Поиска Яндекс",
+  "version": "1.0",
+  "description": "Позволяет выключить открытие сайтов в новой вкладке при поиске через Яндекс",
+
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "64": "images/icon-64.png",
+    "128": "images/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "js": ["scripts/content.js"],
+      "matches": [
+        "https://yandex.ru/*search*",
+        "https://yandex.by/*search*",
+        "https://yandex.ua/*search*",
+        "https://yandex.net/*search*",
+        "https://yandex.org/*search*",
+        "https://yandex.com.ru/*search*",
+        "https://yandex.com/*search*"
+      ]
+    }
+  ]
+}
