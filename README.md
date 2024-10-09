@@ -4,8 +4,15 @@
 
 </div>
 
+
 <details>
-  <summary>Установка</summary>
+  <summary>Простая установка</summary>
+  https://chromewebstore.google.com/detail/одна-вкладка-поиска-яндек/gdmgaolhbllpodgbdpmgbcdnplkcijcd?authuser=1&hl=ru
+</details>
+
+
+<details>
+  <summary>Сложная установка</summary>
 
   1. Открыть страницу (chrome://extensions)
   2. Включить режим разработчика (правый верхний угол)
@@ -15,3 +22,5 @@
   **Вариант 2:** Загрузить сжатую версию (путем перетаскивания файла сжатого расширения https://github.com/valiantsin-dzerakh/yandex-one-tab/releases/download/v1.0/yandex-one-tab.v1.crx)
 
 </details>
+
+
