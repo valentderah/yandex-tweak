@@ -26,9 +26,9 @@ YMailManager = function () {
                         self.plans_url
                     )
                 ) {
-                    r_ads_block.remove()
+                    r_ads_block.style.display = 'none'
                 }
-                t_ads_block.remove()
+                t_ads_block.style.display = 'none'
             }
         }
     }
