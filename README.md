@@ -18,7 +18,7 @@
 <details>
 <summary>Расширение в магазинах расширений</summary> 
 
-1. https://chromewebstore.google.com/detail/одна-вкладка-поиска-яндек/gdmgaolhbllpodgbdpmgbcdnplkcijcd?authuser=1&hl=ru.
+1. https://vk.cc/cKRx0U
 </details>
 </div>
 
