@@ -1,0 +1,26 @@
+{
+  "ext_name": {
+    "message": "Яндекс Твик - adblock почты, одна вкладка поиска"
+  },
+  "ext_description": {
+    "message": "Одна вкладка поиска Яндекс. Почта без рекламы."
+  },
+  "one_tab_search": {
+    "message": "Одна вкладка поиска"
+  },
+  "remove_ads_in_mail": {
+    "message": "Одна вкладка поиска"
+  },
+  "settings": {
+    "message": "Настройки"
+  },
+  "save": {
+    "message": "Сохранить"
+  },
+  "title": {
+    "message": "Яндекс Твик"
+  },
+  "params_saved": {
+    "message": "Настройки сохранены"
+  }
+}

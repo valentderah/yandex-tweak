@@ -55,8 +55,23 @@ label {
     margin-bottom: 1rem;
 }
 
-#save {
-    margin-top: 0.5rem;
+.text {
+    font-size: 0.8rem;
+    color: #9A9C9F;
+}
+
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.ml-1 {
+    margin-left: 1rem;
 }
 
 button {
@@ -74,7 +89,41 @@ input[type="checkbox"] {
 }
 
 input[type='checkbox']:checked + label {
-  background-color: #FF0;
-  font-weight: bolder;
+    background-color: #FF0;
+    font-weight: bolder;
 }
 
+
+.fade-in {
+    animation-name: fade-in;
+    animation-duration: 0.3s;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.fade-out {
+    animation-name: fade-out;
+    animation-duration: 0.3s;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

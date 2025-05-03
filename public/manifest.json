@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Яндекс Твик - adblock почты, одна вкладка поиска",
-  "version": "2.0.3",
-  "description": "Одна вкладка поиска Яндекс. Почта без рекламы.",
+  "name": "__MSG_ext_name__",
+  "version": "2.1.1",
+  "description": "__MSG_ext_description__",
+  "default_locale": "ru",
   "icons": {
     "16": "images/icon-16.png",
     "32": "images/icon-32.png",
@@ -10,12 +11,12 @@
     "128": "images/icon-128.png"
   },
   "action": {
-    "default_popup": "layout/settings.html"
+    "default_popup": "index.html"
   },
   "content_scripts": [
     {
       "js": [
-        "scripts/content.js"
+        "background.js"
       ],
       "matches": [
         "https://yandex.ru/*search*",
@@ -36,10 +37,5 @@
   ],
   "permissions": [
     "storage"
-  ],
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "{62cdc5bb-7d77-4c0d-8b3d-34f6e4bc8865}"
-    }
-  }
+  ]
 }

@@ -1,0 +1,26 @@
+{
+  "ext_name": {
+    "message": "Yandex Twik - adblock for mail, one tab search"
+  },
+  "ext_description": {
+    "message": "One tab search for Yandex Mail without ads."
+  },
+  "one_tab_search": {
+    "message": "One tab search"
+  },
+  "remove_ads_in_mail": {
+    "message": "Adblock for mail"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "save": {
+    "message": "Save"
+  },
+  "title": {
+    "message": "Yandex Twik"
+  },
+  "params_saved": {
+    "message": "Saved!"
+  }
+}
