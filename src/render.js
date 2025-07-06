@@ -89,17 +89,17 @@ const context = {
         {
             id: 'one_tab_search',
             text: t('one_tab_search'),
-            checked: false
+            checked: true
         },
         {
             id: 'remove_ads_in_mail',
             text: t('remove_ads_in_mail'),
-            checked: false
+            checked: true
         },
         {
             id: 'remove_ads_in_search',
             text: t('remove_ads_in_search'),
-            checked: false
+            checked: true
         }
     ]
 }
