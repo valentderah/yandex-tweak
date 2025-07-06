@@ -11,6 +11,9 @@
   "remove_ads_in_mail": {
     "message": "Почта без рекламы"
   },
+  "remove_ads_in_search": {
+    "message": "Поиск без рекламы"
+  },
   "settings": {
     "message": "Настройки"
   },

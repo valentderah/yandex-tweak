@@ -95,6 +95,11 @@ const context = {
             id: 'remove_ads_in_mail',
             text: t('remove_ads_in_mail'),
             checked: false
+        },
+        {
+            id: 'remove_ads_in_search',
+            text: t('remove_ads_in_search'),
+            checked: false
         }
     ]
 }

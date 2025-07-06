@@ -11,6 +11,9 @@
   "remove_ads_in_mail": {
     "message": "Adblock for mail"
   },
+  "remove_ads_in_search": {
+    "message": "Adblock for search"
+  },
   "settings": {
     "message": "Settings"
   },
