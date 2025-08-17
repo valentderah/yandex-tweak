@@ -54,7 +54,9 @@ label {
     color: #9A9C9F;
     margin-bottom: 1rem;
 }
-
+.pointer {
+    cursor: pointer;
+}
 .text {
     font-size: 0.8rem;
     color: #9A9C9F;
@@ -73,6 +75,15 @@ label {
 .ml-1 {
     margin-left: 1rem;
 }
+
+.ml-05 {
+    margin-left: 0.5rem;
+}
+
+.pr-0 {
+    margin-left: auto;
+}
+
 
 button {
     background-color: #35383E;

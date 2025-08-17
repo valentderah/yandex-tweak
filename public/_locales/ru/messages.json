@@ -25,5 +25,8 @@
   },
   "params_saved": {
     "message": "Настройки сохранены"
+  },
+  "tg_link": {
+    "message": "https://t.me/valentderah"
   }
 }

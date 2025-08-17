@@ -36,6 +36,11 @@ const Components = {
         return `
             <div id="${id}" class="text ${classes}" ${hidden ? 'hidden' : ''}>${text}</div>
         `
+    },
+    Icon: function ({id = 'id', src = 'src', width='10px', classes=''} = {}) {
+        return `
+            <img id="${id}" src="${src}" width="${width}" class="${classes}"/>
+        `
     }
 }
 
@@ -156,18 +161,43 @@ const App = {
                 return saveOptions()
             }
         )
+        document.getElementById('tg_link').addEventListener(
+            'click',
+            () => {
+                return chrome.tabs.create({url: t('tg_link')})
+            }
+        )
     },
     template: function ({context, components}) {
         return `
             <div id="main" class="container x-padding y-padding">
-                ${components.Title({text: t('title')})}
+                <div class="d-flex">
+                ${components.Title({text: t('title')})} 
+                </div>
                 ${components.Subtitle({text: t('settings')})}
                 ${components.OptionsList({options: context.options})}
                 <div class="d-flex mt-1">
                 ${components.Button({id: 'save', text: t('save')})}
-                ${components.Text({id: 'saved_text', text: t('params_saved'), classes: 'ml-1 opacity-0'})}
+                ${
+                    components.Text(
+                        {
+                            id: 'saved_text',
+                            text: t('params_saved'),
+                            classes: 'ml-1 opacity-0'
+                        }
+                    )
+                }
+                ${
+                    components.Icon(
+                        {
+                            id: 'tg_link',
+                            classes: 'pr-0 pointer',
+                            src: './images/icons/tg.svg',
+                            width: '35px'
+                        }
+                    )
+                }
                 </div>
-               
             </div>
         `
     },
@@ -182,6 +212,7 @@ const App = {
         )
     }
 }
+
 
 document.addEventListener(
     'DOMContentLoaded',
