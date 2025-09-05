@@ -38,7 +38,8 @@ const YandexTweak = (
                 func: function () {
                     let selectors = {
                         header: '#js-mail-layout-content-header>:not([data-react-focus-root="toolbar"])',
-                        content: '#js-layout-inner'
+                        content: '#js-layout-inner',
+                        content_test: 'div[data-testid="page-layout_right-column_container"]'
                     }
 
                     function getMailBlocks() {
@@ -56,6 +57,10 @@ const YandexTweak = (
 
                         blocks.push(
                             document.querySelector(selectors.content)?.nextSibling
+                        )
+
+                        blocks.push(
+                            document.querySelector(selectors.content_test)
                         )
 
                         return blocks
