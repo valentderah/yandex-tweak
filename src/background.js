@@ -37,7 +37,7 @@ const YandexTweak = (
                 load_default: true,
                 func: function () {
                     let selectors = {
-                        header: '#js-mail-layout-content-header>:not([data-react-focus-root="toolbar"])',
+                        header: '#js-mail-layout-content-header>:not([data-react-focus-root="toolbar"]):not(:first-child)',
                         content: '#js-layout-inner',
                         content_test: 'div[data-testid="page-layout_right-column_container"]'
                     }
