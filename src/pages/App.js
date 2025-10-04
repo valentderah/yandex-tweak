@@ -1,8 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
+
 import useOptions from '../hooks/useOptions';
+import {useSaveAnimation} from '../hooks/useSaveAnimation';
+
 import t from '../utils/t';
 import newTab from "../utils/tab";
-// Components
+
+// UI Components
 import Button from '../components/Button';
 import OptionsList from '../components/OptionsList';
 import Title from '../components/Title';
@@ -12,29 +16,8 @@ import Icon from '../components/Icon';
 
 
 const App = () => {
-    const {options, handleOptionChange} = useOptions();
-    const [savedTextClasses, setSavedTextClasses] = useState('ml-1 opacity-0');
-
-    const saveOptions = () => {
-        const optionsToSave = options.reduce((acc, option) => {
-            acc[option.id] = option.checked;
-            return acc;
-        }, {});
-
-        const showSaveAnimation = () => {
-            setSavedTextClasses('ml-1 fade-in');
-            setTimeout(() => {
-                setSavedTextClasses('ml-1 fade-out opacity-0');
-                setTimeout(() => setSavedTextClasses('ml-1 opacity-0'), 1000);
-            }, 3000);
-        };
-
-        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
-            chrome.storage.sync.set(optionsToSave, showSaveAnimation);
-        } else {
-            showSaveAnimation();
-        }
-    };
+    const {options, handleOptionChange, saveOptions} = useOptions();
+    const {textClasses, triggerSave} = useSaveAnimation(saveOptions);
 
     const openTG = () => {
         return newTab(t('tg_link'))
@@ -47,12 +30,16 @@ const App = () => {
             </div>
             <Subtitle text={t('settings')}/>
             <OptionsList options={options} onOptionChange={handleOptionChange}/>
+
             <div className="d-flex mt-1">
-                <Button id="save" text={t('save')} onClick={saveOptions}/>
+                <Button
+                    id="save" text={t('save')}
+                    onClick={triggerSave}
+                />
                 <Text
                     id="saved_text"
                     text={t('params_saved')}
-                    classes={savedTextClasses}
+                    classes={textClasses}
                 />
                 <Icon
                     id="tg_link"

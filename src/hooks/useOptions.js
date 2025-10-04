@@ -29,7 +29,20 @@ const useOptions = () => {
         ));
     };
 
-    return { options, handleOptionChange, setOptions };
+    const saveOptions = (onSuccess) => {
+        const optionsToSave = options.reduce((acc, option) => {
+            acc[option.id] = option.checked;
+            return acc;
+        }, {});
+
+        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
+            chrome.storage.sync.set(optionsToSave, onSuccess);
+        } else {
+            onSuccess?.();
+        }
+    };
+
+    return { options, handleOptionChange, saveOptions };
 };
 
 export default useOptions;
