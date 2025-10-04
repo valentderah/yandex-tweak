@@ -1,222 +1,116 @@
-const Components = {
-    OptionsList: function ({options = []} = {}) {
-        return `
-            <div class="options-list">
-                ${options.map(option => Components.Option(option)).join('')}
-            </div>
-        `
-    },
-    Option: function ({id = 'id', text = 'name', checked = false} = {}) {
-        return `
-            <div class="option">
-                <label class="checkbox">
-                    <span class="checkmark"></span>
-                    <input type="checkbox" class="input-checkbox" id="${id}" ${checked ? 'checked' : ''}/>
-                    ${text}
-                </label>
-            </div>
-            `
-    },
-    Button: function ({id = 'id', text = 'name'} = {}) {
-        return `
-            <button id="${id}">${text}</button>
-        `
-    },
-    Title: function ({text = 'name'} = {}) {
-        return `
-            <div class="title">${text}</div>
-        `
-    },
-    Subtitle: function ({text = 'name'} = {}) {
-        return `
-            <div class="subtitle">${text}</div>
-        `
-    },
-    Text: function ({id='textId', text = 'name', hidden = false, classes = ''} = {}) {
-        return `
-            <div id="${id}" class="text ${classes}" ${hidden ? 'hidden' : ''}>${text}</div>
-        `
-    },
-    Icon: function ({id = 'id', src = 'src', width='10px', classes=''} = {}) {
-        return `
-            <img id="${id}" src="${src}" width="${width}" class="${classes}"/>
-        `
-    }
-}
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom/client';
+import Button from './components/Button';
+import OptionsList from './components/OptionsList';
+import Title from './components/Title';
+import Subtitle from './components/Subtitle';
+import Text from './components/Text';
+import Icon from './components/Icon';
 
 const messages = {
     // dev i18n
-}
+};
 
 const t = (key) => {
-    if (chrome.i18n.getMessage(key)) {
-        return chrome.i18n.getMessage(key)
+    if (typeof chrome !== 'undefined' && chrome.i18n && chrome.i18n.getMessage(key)) {
+        return chrome.i18n.getMessage(key);
     }
     if (messages && messages[key]) {
-        return messages[key].message
+        return messages[key].message;
     }
-    return key
-}
+    return key;
+};
 
+const App = () => {
+    const [options, setOptions] = useState([]);
+    const [savedTextClasses, setSavedTextClasses] = useState('ml-1 opacity-0');
 
-const saveOptions = function () {
-    let options = document.querySelectorAll(
-        '.option > .checkbox > .input-checkbox'
-    )
-    let send = {}
+    useEffect(() => {
+        const defaultOptions = [
+            { id: 'one_tab_search', text: t('one_tab_search'), checked: true },
+            { id: 'remove_ads_in_mail', text: t('remove_ads_in_mail'), checked: true },
+            { id: 'remove_ads_in_search', text: t('remove_ads_in_search'), checked: true }
+        ];
 
-    Array.from(options).map(
-        option => {
-            send[option.id] = option.checked
-        }
-    )
-    const saveAnim = (
-        {el = document.getElementById('saved_text')}
-    ) => {
-        el.classList.add('fade-in')
-        el.classList.remove('opacity-0')
-        setTimeout(
-            () => {
-                el.classList.remove('fade-in')
-                el.classList.add('fade-out')
-                el.classList.add('opacity-0')
-            },
-            3000
-        )
-    }
-    chrome.storage.sync.set(send, ()=>{saveAnim({})})
-
-}
-
-
-const context = {
-    options: [
-        {
-            id: 'one_tab_search',
-            text: t('one_tab_search'),
-            checked: true
-        },
-        {
-            id: 'remove_ads_in_mail',
-            text: t('remove_ads_in_mail'),
-            checked: true
-        },
-        {
-            id: 'remove_ads_in_search',
-            text: t('remove_ads_in_search'),
-            checked: true
-        }
-    ]
-}
-
-const getFromStorage = function (
-    {key, def} = {}
-) {
-
-    if (chrome.storage) {
-        return chrome.storage.sync.get({[key]: def})
-    }
-
-    return Promise.resolve({[key]: def})
-}
-
-const getContext = function () {
-    return new Promise(
-        (resolve, reject) => {
-            let chain = Promise.resolve()
-
-            context.options.map(
-                (option) => {
-                    chain = chain.then(
-                        () => {
-                            return Promise.resolve(
-                                getFromStorage(
-                                    {key: option.id, def: option.checked}
-                                ).then(
-                                    (item) => {
-                                        option.checked = item[option.id]
-                                    }
-                                )
-                            )
-                        }
-                    )
-                }
-            )
-
-            chain.then(
-                () => {
-                    return resolve(context)
-                }
-            )
-        }
-    )
-}
-
-const App = {
-
-    events: function () {
-        document.getElementById('save').addEventListener(
-            'click',
-            () => {
-                return saveOptions()
-            }
-        )
-        document.getElementById('tg_link').addEventListener(
-            'click',
-            () => {
-                return chrome.tabs.create({url: t('tg_link')})
-            }
-        )
-    },
-    template: function ({context, components}) {
-        return `
-            <div id="main" class="container x-padding y-padding">
-                <div class="d-flex">
-                ${components.Title({text: t('title')})} 
-                </div>
-                ${components.Subtitle({text: t('settings')})}
-                ${components.OptionsList({options: context.options})}
-                <div class="d-flex mt-1">
-                ${components.Button({id: 'save', text: t('save')})}
-                ${
-                    components.Text(
-                        {
-                            id: 'saved_text',
-                            text: t('params_saved'),
-                            classes: 'ml-1 opacity-0'
-                        }
-                    )
-                }
-                ${
-                    components.Icon(
-                        {
-                            id: 'tg_link',
-                            classes: 'pr-0 pointer',
-                            src: './images/icons/tg.svg',
-                            width: '35px'
-                        }
-                    )
-                }
-                </div>
-            </div>
-        `
-    },
-    render: function () {
-        getContext().then(
-            (context) => {
-                document.getElementById('app').innerHTML = App.template(
-                    {context: context, components: Components}
+        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
+            Promise.all(
+                defaultOptions.map(option =>
+                    chrome.storage.sync.get({ [option.id]: option.checked })
+                        .then(items => ({ ...option, checked: items[option.id] }))
                 )
-                App.events()
-            }
-        )
-    }
-}
+            ).then(setOptions);
+        } else {
+            setOptions(defaultOptions);
+        }
+    }, []);
 
+    const handleOptionChange = (changedId) => {
+        setOptions(options.map(option =>
+            option.id === changedId ? { ...option, checked: !option.checked } : option
+        ));
+    };
 
-document.addEventListener(
-    'DOMContentLoaded',
-    () => {
-        App.render()
-    }
-)
+    const saveOptions = () => {
+        const optionsToSave = options.reduce((acc, option) => {
+            acc[option.id] = option.checked;
+            return acc;
+        }, {});
+
+        const showSaveAnimation = () => {
+            setSavedTextClasses('ml-1 fade-in');
+            setTimeout(() => {
+                setSavedTextClasses('ml-1 fade-out opacity-0');
+                // After fade out animation, reset to just hidden
+                setTimeout(() => setSavedTextClasses('ml-1 opacity-0'), 1000);
+            }, 3000);
+        };
+        
+        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
+            chrome.storage.sync.set(optionsToSave, showSaveAnimation);
+        } else {
+            showSaveAnimation();
+        }
+    };
+
+    const openTgLink = () => {
+        const url = t('tg_link');
+        if (typeof chrome !== 'undefined' && chrome.tabs) {
+            chrome.tabs.create({ url });
+        } else {
+            window.open(url, '_blank');
+        }
+    };
+
+    return (
+        <div id="main" className="container x-padding y-padding">
+            <div className="d-flex">
+                <Title text={t('title')} />
+            </div>
+            <Subtitle text={t('settings')} />
+            <OptionsList options={options} onOptionChange={handleOptionChange} />
+            <div className="d-flex mt-1">
+                <Button id="save" text={t('save')} onClick={saveOptions} />
+                <Text
+                    id="saved_text"
+                    text={t('params_saved')}
+                    classes={savedTextClasses}
+                />
+                <Icon
+                    id="tg_link"
+                    classes="pr-0 pointer"
+                    src="./images/icons/tg.svg"
+                    width="35px"
+                    onClick={openTgLink}
+                />
+            </div>
+        </div>
+    );
+};
+
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container);
+root.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+);
