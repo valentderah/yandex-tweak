@@ -32,13 +32,15 @@ export const clearBlocks = ({blocks = []}) => {
  * @param {number} options.current Current retry count
  * @param {number} options.timeout Timeout between retries
  */
-export const retryClean = ({
-                               func,
-                               getBlocks,
-                               trys = 5,
-                               current = 0,
-                               timeout = 1500,
-                           }) => {
+export const retryClean = (
+    {
+        func,
+        getBlocks,
+        trys = 5,
+        current = 0,
+        timeout = 1500,
+    }
+) => {
     if (current > trys) return;
 
     func({blocks: getBlocks()});

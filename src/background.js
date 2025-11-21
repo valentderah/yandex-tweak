@@ -1,88 +1,16 @@
-import {watchUrlChanges} from "./utils/url";
-import {unTarget, clearBlocks, retryClean} from "./utils/dom";
 import {storage} from "./utils/storage";
-import {DEFAULT_OPTIONS} from "./utils/constants";
-
-// --- Features ---
+import {DEFAULT_OPTIONS, FEATURES} from "./utils/constants";
+import {
+    initSearchAdblock,
+    initRemoveAdsInMail,
+    initOneTabSearch,
+} from "./features";
 
 const features = {
-    search_adblock: {
-        run: () => {
-            const selectors = {
-                ads: ".AdvRsyaCrossPage, .AdvMastHead",
-            };
-
-            const getBlocks = () => [...document.querySelectorAll(selectors.ads)];
-
-            watchUrlChanges({
-                handler: retryClean,
-                params: {
-                    getBlocks,
-                    func: clearBlocks,
-                },
-                runOnCall: true,
-            });
-        },
-    },
-
-    remove_ads_in_mail: {
-        run: () => {
-            const selectors = {
-                header:
-                    '#js-mail-layout-content-header>:not([data-react-focus-root="toolbar"]):not(:first-child)',
-                content: "#js-layout-inner",
-                contentTest: 'div[data-testid="page-layout_right-column_container"]',
-            };
-
-            const getMailBlocks = () => {
-                const blocks = [];
-
-                const hideTop = document.querySelectorAll(selectors.header);
-                if (hideTop.length) {
-                    blocks.push(...hideTop);
-                }
-
-                const content = document.querySelector(selectors.content);
-                if (content?.nextSibling) {
-                    blocks.push(content.nextSibling);
-                }
-
-                const contentTest = document.querySelector(selectors.contentTest);
-                if (contentTest) {
-                    blocks.push(contentTest);
-                }
-
-                return blocks;
-            };
-
-            retryClean({
-                func: clearBlocks,
-                getBlocks: getMailBlocks,
-            });
-        },
-    },
-
-    one_tab_search: {
-        run: () => {
-            const selectors = {
-                tabs: ".serp-item_card .Link, .HeaderNav-Tab",
-            };
-
-            const getBlocks = () => {
-                const blocks = document.querySelectorAll(selectors.tabs);
-                return blocks.length ? [...blocks] : [];
-            };
-
-            watchUrlChanges({
-                handler: unTarget,
-                params: {elements: getBlocks()},
-                runOnCall: true,
-            });
-        },
-    },
+    [FEATURES.SEARCH_ADBLOCK]: initSearchAdblock,
+    [FEATURES.REMOVE_ADS_IN_MAIL]: initRemoveAdsInMail,
+    [FEATURES.ONE_TAB_SEARCH]: initOneTabSearch,
 };
-
-// --- Initialization ---
 
 const run = async () => {
 
@@ -97,7 +25,7 @@ const run = async () => {
 
         enabledFeatures.forEach((key) => {
             if (features[key]) {
-                features[key].run();
+                features[key]();
             }
         });
     } catch (e) {
