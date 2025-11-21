@@ -1,48 +1,53 @@
-import { useState, useEffect } from 'react';
-import t from '../utils/t';
+import { useState, useEffect, useCallback } from "react";
+import { DEFAULT_OPTIONS } from "../utils/constants";
+import { storage } from "../utils/storage";
 
 const useOptions = () => {
-    const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState([]);
 
-    useEffect(() => {
-        const defaultOptions = [
-            { id: 'one_tab_search', text: t('one_tab_search'), checked: true },
-            { id: 'remove_ads_in_mail', text: t('remove_ads_in_mail'), checked: true },
-            { id: 'remove_ads_in_search', text: t('remove_ads_in_search'), checked: true }
-        ];
-
-        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
-            Promise.all(
-                defaultOptions.map(option =>
-                    chrome.storage.sync.get({ [option.id]: option.checked })
-                        .then(items => ({ ...option, checked: items[option.id] }))
-                )
-            ).then(setOptions);
-        } else {
-            setOptions(defaultOptions);
-        }
-    }, []);
-
-    const handleOptionChange = (changedId) => {
-        setOptions(options.map(option =>
-            option.id === changedId ? { ...option, checked: !option.checked } : option
-        ));
+  useEffect(() => {
+    const loadOptions = async () => {
+      try {
+        const loadedOptions = await Promise.all(
+          DEFAULT_OPTIONS.map(async (option) => {
+            const items = await storage.get({ [option.id]: option.checked });
+            return { ...option, checked: items[option.id] };
+          })
+        );
+        setOptions(loadedOptions);
+      } catch (error) {
+        console.error("Failed to load options:", error);
+        setOptions(DEFAULT_OPTIONS);
+      }
     };
 
-    const saveOptions = (onSuccess) => {
-        const optionsToSave = options.reduce((acc, option) => {
-            acc[option.id] = option.checked;
-            return acc;
-        }, {});
+    loadOptions();
+  }, []);
 
-        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
-            chrome.storage.sync.set(optionsToSave, onSuccess);
-        } else {
-            onSuccess?.();
-        }
-    };
+  const handleOptionChange = useCallback((changedId) => {
+    setOptions((currentOptions) =>
+      currentOptions.map((option) =>
+        option.id === changedId
+          ? { ...option, checked: !option.checked }
+          : option
+      )
+    );
+  }, []);
 
-    return { options, handleOptionChange, saveOptions };
+  const saveOptions = useCallback(async () => {
+    const optionsToSave = options.reduce((acc, option) => {
+      acc[option.id] = option.checked;
+      return acc;
+    }, {});
+
+    try {
+      await storage.set(optionsToSave);
+    } catch (error) {
+      console.error("Failed to save options:", error);
+    }
+  }, [options]);
+
+  return { options, handleOptionChange, saveOptions };
 };
 
 export default useOptions;

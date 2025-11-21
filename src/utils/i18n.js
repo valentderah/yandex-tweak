@@ -2,7 +2,7 @@ const messages = {
     // dev i18n
 };
 
-const t = (key) => {
+export const t = (key) => {
     if (typeof chrome !== 'undefined' && chrome.i18n && chrome.i18n.getMessage(key)) {
         return chrome.i18n.getMessage(key);
     }
@@ -13,3 +13,4 @@ const t = (key) => {
 };
 
 export default t;
+

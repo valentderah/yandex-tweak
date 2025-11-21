@@ -1,4 +1,4 @@
-const newTab = (url) => {
+export const newTab = (url) => {
     if (typeof chrome !== 'undefined' && chrome.tabs) {
         chrome.tabs.create({url});
     } else {

@@ -1,36 +1,55 @@
-import { useState, useEffect, useCallback } from 'react';
+import {useState, useEffect, useCallback} from 'react';
 
+const ANIMATION_DURATION = 1000;
+
+/**
+ * Hook to handle save animation state and logic
+ * @param {Function} onSave Async function to execute when save is triggered.
+ * @returns {Object} { status, triggerSave, onAnimationEnd, textClasses }
+ */
 export const useSaveAnimation = (onSave) => {
-    const [isSaving, setIsSaving] = useState(false);
-    const [textClasses, setTextClasses] = useState('ml-1 opacity-0');
+    const [status, setStatus] = useState('idle'); // 'idle' | 'saving' | 'visible' | 'hiding'
+
+    const triggerSave = useCallback(async () => {
+        if (status !== 'idle') return;
+
+        setStatus('saving');
+        try {
+            await onSave();
+            setStatus('visible');
+        } catch (error) {
+            setStatus('idle');
+        }
+    }, [onSave, status]);
 
     useEffect(() => {
-        if (!isSaving) return;
+        if (status === 'visible') {
+            const timer = setTimeout(() => setStatus('hiding'), ANIMATION_DURATION);
+            return () => clearTimeout(timer);
+        }
+    }, [status]);
 
-        // Используем setTimeout, чтобы браузер успел отрисовать начальное состояние перед анимацией
-        const fadeInTimer = setTimeout(() => {
-            setTextClasses('ml-1 fade-in');
-        }, 10);
+    const onAnimationEnd = useCallback(() => {
+        if (status === 'hiding') {
+            setStatus('idle');
+        }
+    }, [status]);
 
-        const fadeOutTimer = setTimeout(() => {
-            setTextClasses('ml-1 fade-out opacity-0');
-        }, 2000);
+    const getClasses = () => {
+        switch (status) {
+            case 'visible':
+                return 'ml-1 fade-in';
+            case 'hiding':
+                return 'ml-1 fade-out opacity-0';
+            default:
+                return 'ml-1 opacity-0';
+        }
+    };
 
-        const resetStateTimer = setTimeout(() => {
-            setIsSaving(false);
-            setTextClasses('ml-1 opacity-0');
-        }, 3000);
-
-        return () => {
-            clearTimeout(fadeInTimer);
-            clearTimeout(fadeOutTimer);
-            clearTimeout(resetStateTimer);
-        };
-    }, [isSaving]);
-
-    const triggerSave = useCallback(() => {
-        onSave(() => setIsSaving(true));
-    }, [onSave]);
-
-    return { textClasses, triggerSave };
+    return {
+        status,
+        textClasses: getClasses(),
+        triggerSave,
+        onAnimationEnd
+    };
 };
