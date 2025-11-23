@@ -1,5 +1,5 @@
-import {watchUrlChanges} from "../utils/url";
-import {unTarget} from "../utils/dom";
+import {watchUrlChanges} from "../../shared/utils/url";
+import {unTarget} from "../../shared/utils/dom";
 
 export const initOneTabSearch = () => {
     const selectors = {

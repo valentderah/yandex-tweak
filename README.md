@@ -3,7 +3,7 @@
 </div>
 
 <div>
-  <h2>Yandex Tweak <img src="public/images/icon-32.png" width="20px"></h2>
+  <h2>Yandex Tweak <img src="public/images/icons/icon-32.png" width="20px"></h2>
   <p>This extension is created for users of Yandex services. <br>It helps to avoid creating multiple tabs during search and also blocks ads in Yandex Mail.</p>
 </div>
 <img src="public/images/poster-en.png">

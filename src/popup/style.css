@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Raleway';
-    src: url('./fonts/Raleway-Bold.otf') format('otf'),
-    url('./fonts/Raleway-ExtraBold.otf') format('otf');
+    src: url('../shared/fonts/Raleway-Bold.otf') format('otf'),
+    url('../shared/fonts/Raleway-ExtraBold.otf') format('otf');
 }
 
 .x-padding {
@@ -54,9 +54,11 @@ label {
     color: #9A9C9F;
     margin-bottom: 1rem;
 }
+
 .pointer {
     cursor: pointer;
 }
+
 .text {
     font-size: 0.8rem;
     color: #9A9C9F;

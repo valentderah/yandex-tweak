@@ -6,9 +6,8 @@ const miniExtractPlugin = require('mini-css-extract-plugin')
 
 const config = {
     entry: {
-        background: './src/background.js',
-        render: './src/render.js',
-        style: './src/style.css'
+        background: './src/content/index.js',
+        render: './src/popup/index.js'
     },
     output: {
         filename: '[name].js',
@@ -16,13 +15,25 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './src/popup/index.html',
             filename: 'index.html'
         }),
         new CopyPlugin({
             patterns: [
                 {
-                    from: 'public'
+                    from: 'public',
+                    globOptions: {
+                        ignore: [
+                            '**/banner.png',
+                            '**/poster-en.png',
+                            '**/poster-ru.png',
+                            '**/screenshot.png'
+                        ]
+                    }
+                },
+                {
+                    from: 'src/shared/fonts',
+                    to: 'fonts'
                 }
             ]
         }),

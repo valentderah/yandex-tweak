@@ -1,4 +1,4 @@
-import {retryClean, clearBlocks} from "../utils/dom";
+import {retryClean, clearBlocks} from "../../shared/utils/dom";
 
 export const initRemoveAdsInMail = () => {
     const selectors = {

@@ -3,7 +3,7 @@
 </div>
 
 <div>
-  <h2>Яндекс Твик <img src="public/images/icon-32.png" width="20px"></h2>
+  <h2>Яндекс Твик <img src="public/images/icons/icon-32.png" width="20px"></h2>
   <p>Данное расширение создано для пользователей серверов Яндекса. <br>Позволяет не плодить вкладки при поиске, а также блокировать рекламу в Яндекс Почте.</p>
 </div>
 <img src="public/images/poster-ru.png">

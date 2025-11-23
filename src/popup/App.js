@@ -1,20 +1,20 @@
 import React, {useCallback} from 'react';
 
 // Hooks
-import useOptions from '../hooks/useOptions';
-import {useSaveAnimation} from '../hooks/useSaveAnimation';
+import useOptions from './hooks/useOptions';
+import {useSaveAnimation} from './hooks/useSaveAnimation';
 
 // Utils
-import {t} from '../utils/i18n';
-import {newTab} from "../utils/tabs";
+import {t} from '../shared/utils/i18n';
+import {newTab} from "../shared/utils/tabs";
 
 // UI Components
-import Button from '../components/Button';
-import OptionsList from '../components/OptionsList';
-import Title from '../components/Title';
-import Subtitle from '../components/Subtitle';
-import Text from '../components/Text';
-import Icon from '../components/Icon';
+import Button from './components/Button';
+import OptionsList from './components/OptionsList';
+import Title from './components/Title';
+import Subtitle from './components/Subtitle';
+import Text from './components/Text';
+import Icon from './components/Icon';
 
 const App = () => {
     const {options, handleOptionChange, saveOptions} = useOptions();

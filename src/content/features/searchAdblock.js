@@ -1,5 +1,5 @@
-import {watchUrlChanges} from "../utils/url";
-import {retryClean, clearBlocks} from "../utils/dom";
+import {watchUrlChanges} from "../../shared/utils/url";
+import {retryClean, clearBlocks} from "../../shared/utils/dom";
 
 export const initSearchAdblock = () => {
     const selectors = {

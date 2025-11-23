@@ -1,7 +1,7 @@
 import React from 'react';
 import Option from './Option';
 
-const OptionsList = ({ options, onOptionChange }) => (
+const OptionsList = ({options, onOptionChange}) => (
     <div className="options-list">
         {options.map(option => (
             <Option

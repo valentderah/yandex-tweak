@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Option = ({ id, text, checked, onOptionChange }) => (
+const Option = ({id, text, checked, onOptionChange}) => (
     <div className="option">
         <label className="checkbox">
             <span className="checkmark"></span>
