@@ -31,5 +31,7 @@
 ---
 <details>
 <summary>Ссылка</summary>
+
 https://www.figma.com/design/x8ccQmPEr58mwUo7WYNipZ/Yandex-Tweak?node-id=0-1&t=pgswNMBTa3I3TeOz-1
+
 </details>

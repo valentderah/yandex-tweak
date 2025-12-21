@@ -2,28 +2,29 @@ import {retryClean, clearBlocks} from "../../shared/utils/dom";
 
 export const initRemoveAdsInMail = () => {
     const selectors = {
-        header:
-            '#js-mail-layout-content-header>:not([data-react-focus-root="toolbar"]):not(:first-child)',
         content: "#js-layout-inner",
-        contentTest: 'div[data-testid="page-layout_right-column_container"]',
+        rightBanner: 'div[data-testid*="page-layout_right-column_container"]',
+        searchBanner: '[id*="js-mail-layout-content-header"]>:not([data-react-focus-root="toolbar"]):not(:first-child)',
     };
 
     const getMailBlocks = () => {
         const blocks = [];
 
-        const hideTop = document.querySelectorAll(selectors.header);
-        if (hideTop.length) {
-            blocks.push(...hideTop);
+        const searchBanner = document.querySelectorAll(selectors.searchBanner);
+        if (searchBanner.length) {
+            blocks.push(...searchBanner);
         }
 
-        const content = document.querySelector(selectors.content);
-        if (content?.nextSibling) {
+        let content = document.querySelector(selectors.content);
+
+        while (content?.nextSibling) {
             blocks.push(content.nextSibling);
+            content = content?.nextSibling;
         }
 
-        const contentTest = document.querySelector(selectors.contentTest);
-        if (contentTest) {
-            blocks.push(contentTest);
+        const rightBanner = document.querySelector(selectors.rightBanner);
+        if (rightBanner) {
+            blocks.push(rightBanner);
         }
 
         return blocks;
