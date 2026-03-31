@@ -22,7 +22,7 @@
 <details>
 <summary>Расширение в магазинах расширений</summary> 
 
-1. https://vk.cc/cKRx0U
+1. https://chromewebstore.google.com/detail/%D1%8F%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D1%82%D0%B2%D0%B8%D0%BA-adblock-%D0%BF%D0%BE%D1%87%D1%82%D1%8B/gdmgaolhbllpodgbdpmgbcdnplkcijcd
 </details>
 </div>
 
