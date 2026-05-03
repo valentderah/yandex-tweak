@@ -1,7 +1,7 @@
 import {storage} from "../shared/utils/storage";
 import {DEFAULT_OPTIONS, FEATURES} from "../shared/utils/constants";
 import {
-    initSearchAdblock,
+    initRemoveAdsInSearch,
     initRemoveAdsInMail,
     initRemoveAdsInWeather,
     initOneTabSearch,
@@ -10,7 +10,7 @@ import {
 class YandexTweak {
     constructor() {
         this.features = {
-            [FEATURES.SEARCH_ADBLOCK]: initSearchAdblock,
+            [FEATURES.SEARCH_ADBLOCK]: initRemoveAdsInSearch,
             [FEATURES.REMOVE_ADS_IN_MAIL]: initRemoveAdsInMail,
             [FEATURES.REMOVE_ADS_IN_WEATHER]: initRemoveAdsInWeather,
             [FEATURES.ONE_TAB_SEARCH]: initOneTabSearch,

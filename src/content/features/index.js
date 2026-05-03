@@ -1,5 +1,5 @@
 export * from './oneTabSearch';
 export * from './removeAdsInMail';
-export * from './searchAdblock';
+export * from './removeAdsInSearch';
 export * from './removeAdsInWeather';
 

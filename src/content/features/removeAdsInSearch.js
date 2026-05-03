@@ -1,7 +1,7 @@
 import {watchUrlChanges} from "../../shared/utils/url";
 import {retryClean, clearBlocks} from "../../shared/utils/dom";
 
-export const initSearchAdblock = () => {
+export const initRemoveAdsInSearch = () => {
     const selectors = {
         ads: ".AdvRsyaCrossPage, .AdvMastHead",
     };
