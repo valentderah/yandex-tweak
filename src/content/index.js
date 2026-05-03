@@ -3,6 +3,7 @@ import {DEFAULT_OPTIONS, FEATURES} from "../shared/utils/constants";
 import {
     initSearchAdblock,
     initRemoveAdsInMail,
+    initRemoveAdsInWeather,
     initOneTabSearch,
 } from "./features";
 
@@ -11,6 +12,7 @@ class YandexTweak {
         this.features = {
             [FEATURES.SEARCH_ADBLOCK]: initSearchAdblock,
             [FEATURES.REMOVE_ADS_IN_MAIL]: initRemoveAdsInMail,
+            [FEATURES.REMOVE_ADS_IN_WEATHER]: initRemoveAdsInWeather,
             [FEATURES.ONE_TAB_SEARCH]: initOneTabSearch,
         };
     }

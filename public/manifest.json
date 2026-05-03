@@ -31,7 +31,11 @@
         "https://mail.yandex.ru/*",
         "https://mail.yandex.kz/*",
         "https://mail.yandex.ua/*",
-        "https://mail.yandex.ua/*"
+        "https://mail.yandex.ua/*",
+        "https://yandex.com/weather/*",
+        "https://yandex.ru/pogoda/*",
+        "https://yandex.by/pogoda/*",
+        "https://yandex.kz/pogoda/*"
       ]
     }
   ],
