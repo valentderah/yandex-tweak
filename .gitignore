@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+
+# Webpack output
+dist/
+
+# Logs and debug
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment and secrets (if added later)
+.env
+.env.*
+!.env.example
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE / editors
+.idea/
+*.iml
+*.sw?
+*.swo
+*~
+
+# Packaged extension builds
+*.zip
+*.crx
+*.pem
+
+# Optional tooling caches
+.cache/
+.parcel-cache/
+.turbo/
