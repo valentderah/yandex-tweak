@@ -35,9 +35,11 @@ Desktop.ini
 
 # Packaged extension builds
 builds/
+release/
 *.zip
 *.crx
 *.pem
+key.pem
 
 # Optional tooling caches
 .cache/
